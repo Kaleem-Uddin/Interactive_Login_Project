@@ -1,0 +1,40 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | Secure Portal</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <main class="login-container">
+        <section class="login-card">
+            <div class="logo">S</div>
+
+            <h1>Welcome!</h1>
+            <p class="subtitle">You are successfully logged in.</p>
+
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    <div class="message" role="status">
+                        {% for message in messages %}
+                            <p>{{ message }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            {% endwith %}
+
+            <p><strong>Email:</strong> {{ session.get('email', '') }}</p>
+
+            <form action="{{ url_for('logout') }}" method="POST">
+                <button type="submit" class="login-button">
+                    Logout
+                </button>
+            </form>
+        </section>
+
+        <p class="footer-text">Local Learning Project · Flask Authentication</p>
+    </main>
+</body>
+</html>

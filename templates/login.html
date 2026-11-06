@@ -1,0 +1,68 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | Secure Portal</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <main class="login-container">
+        <section class="login-card">
+            <div class="logo">S</div>
+
+            <h1>Welcome Back</h1>
+            <p class="subtitle">Sign in to your account</p>
+
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    <div class="message" role="alert">
+                        {% for message in messages %}
+                            <p>{{ message }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            {% endwith %}
+
+            <form action="{{ url_for('login') }}" method="POST">
+                <label for="email">Email Address</label>
+                <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder="you@example.com"
+                    autocomplete="email"
+                    required
+                >
+
+                <label for="password">Password</label>
+                <div class="password-wrapper">
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        placeholder="Enter your password"
+                        autocomplete="current-password"
+                        required
+                    >
+                    <button type="button" id="togglePassword" class="toggle-password">
+                        Show
+                    </button>
+                </div>
+
+                <button type="submit" class="login-button">Sign In</button>
+            </form>
+
+            <p class="register-link">
+                Don't have an account?
+                <a href="{{ url_for('register') }}">Create account</a>
+            </p>
+        </section>
+
+        <p class="footer-text">Local Learning Project · Flask Authentication</p>
+    </main>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
